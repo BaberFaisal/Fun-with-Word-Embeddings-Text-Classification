@@ -45,13 +45,13 @@ GloVe pre-trained embeddings (glove-twitter-100)
 
 FastText embeddings (fasttext-wiki-news-subwords-300)
 
-##Example usage:
+## Example usage:
 
 import gensim.downloader as api
 model = api.load('glove-twitter-100')
 model.most_similar(positive=["coder", "money"], negative=["brain"])
 
-##Visualization
+##  Visualization
 
 Embeddings are reduced to 2D using:
 
@@ -66,7 +66,7 @@ draw_vectors(word_vectors_pca[:, 0], word_vectors_pca[:, 1], token=words)
 
 Clusters reveal semantic relationships between words (e.g., synonyms and topic groups).
 
-##Part 2 — Text Classification
+##  Part 2 — Text Classification
 Preprocessing
 
 Tokenization with nltk.TweetTokenizer()
@@ -83,12 +83,12 @@ Build a vocabulary of the top k=10000 most frequent words.
 
 Convert each text into a vector of word counts.
 
-##Model:
+##  Model:
 
 from sklearn.linear_model import LogisticRegression
 bow_model = LogisticRegression(max_iter=10000, C=94)
 
-##TF-IDF Features
+##  TF-IDF Features
 
 Implements manual TF-IDF computation:
 
@@ -103,7 +103,7 @@ Word Embedding Features
 Uses FastText embeddings to represent each comment as the sum of its word vectors.
 This method significantly reduces dimensionality and improves generalization.
 
-##Example:
+##  Example:
 
 embeddings = gensim.downloader.load("fasttext-wiki-news-subwords-300")
 features = np.sum([embeddings[tok] for tok in tokens if tok in embeddings], axis=0)
@@ -118,7 +118,7 @@ TF-IDF model: improved (~0.85 AUC)
 
 Embedding model: excellent (~0.92+ AUC)
 
-##Results Summary
+##  Results Summary
 Model Type	Feature Size	Test AUC	Comments
 Bag of Words	10,000	~0.77	Baseline linear model
 TF-IDF	10,000	~0.85	Better weighting of rare words
